@@ -38,6 +38,7 @@ jobs:
         title: sulfur latest
         automatic_release_tag: latest
         repo_token: "${{ secrets.GIT_TOKEN }}"
+        prerelease: false
         files: |
           sulfur-onefile-linux-x86_64.elf
           sulfur-linux-x86_64.elf

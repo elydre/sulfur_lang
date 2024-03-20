@@ -118,7 +118,10 @@ int interactive_shell(sulfur_args_t *args) {
         fflush(stdout);
         while (1) {
             char *line = fgets(code + decl, 1000 - decl, stdin);
-            if (!line) break;
+            if (!line) {
+                exit_code = 2;
+                break;
+            }
             decl += strlen(line);
             exit_code = does_code_is_good(code);
             if (exit_code) break;
@@ -126,9 +129,8 @@ int interactive_shell(sulfur_args_t *args) {
             fflush(stdout);
         }
 
-        if (exit_code == 2) break;
 
-        if (code[0] == '\n') {
+        if (code[0] == '\n' && exit_code != 2) {
             decl = 0;
             continue;
         }
@@ -155,7 +157,7 @@ int interactive_shell(sulfur_args_t *args) {
             free_tok_val(l[i]);
         }
         free(l);
-
+        if (exit_code == 2) break;
         // clean up
         decl = 0;
     }

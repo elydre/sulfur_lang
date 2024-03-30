@@ -15,22 +15,29 @@ jobs:
     - name: install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y gcc python3
+        sudo apt-get install -y gcc nasm make python3
+
+    - name: build profanOS disk
+      run: |
+        git clone https://github.com/elydre/profanOS.git
+        cd profanOS
+        make disk
+        cd ..
 
     - name: build files
       run: |
         make linux_one_file
-        mv build/sulfur sulfur-onefile-linux-x86_64.elf
+        mv build/sulfur sulfur-onefile-linux-x86_64
 
         make linux
-        mv build/sulfur sulfur-linux-x86_64.elf
+        mv build/sulfur sulfur-linux-x86_64
 
         cd build/
         zip -r ../libs-linux-x86_64.zip libs/
         cd ..
 
-        make profan
-        mv build/sulfur.bin sulfur-profanOS-i386.bin
+        python3 profan_build.py profanOS
+        mv build/sulfur.elf sulfur-profanOS-i386.elf
 
     - name: Release to GitHub
       uses: marvinpinto/action-automatic-releases@latest
@@ -40,7 +47,7 @@ jobs:
         repo_token: "${{ secrets.GIT_TOKEN }}"
         prerelease: false
         files: |
-          sulfur-onefile-linux-x86_64.elf
-          sulfur-linux-x86_64.elf
+          sulfur-onefile-linux-x86_64
+          sulfur-linux-x86_64
           libs-linux-x86_64.zip
-          sulfur-profanOS-i386.bin
+          sulfur-profanOS-i386.elf

@@ -26,7 +26,7 @@ jobs:
 
     - name: build files
       run: |
-        make linux_one_file
+        make linux_one_file1
         mv build/sulfur sulfur-onefile-linux-x86_64
 
         make linux

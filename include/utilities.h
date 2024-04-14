@@ -77,7 +77,7 @@ void*realloc_c(void*mem,long long int old_size,long long int new_size);
 void*get_module_loader(char* filename);
 
 
-#ifdef ONE_FILE
+#if defined(ONE_FILE) && ONE_FILE > 0
 void* get_standard_module(char* filename);
 #endif
 
@@ -93,4 +93,5 @@ char *uti_strdup(char *src);
 
 char *normalize_path(char *path);
 
+char *uti_escape_str(char *s);
 #endif

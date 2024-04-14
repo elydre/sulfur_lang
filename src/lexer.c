@@ -234,7 +234,7 @@ Token *lexe(char *input) {
             p++;
             int n = 0;
             char*s = malloc(sizeof(char));
-            while (p < len && text[p] != '\'') {
+            while (p < len && (text[p] != '\'' || (text[p] == '\'' && text[p - 1] == '\\'))) {
                 n++;
                 s = realloc(s, sizeof(char)*n);
                 s[n-1]= text[p];
@@ -245,8 +245,9 @@ Token *lexe(char *input) {
             n_tok++;
             toks = realloc(toks, sizeof(Token)*n_tok);
             toks[n_tok-1].type = str;
-            toks[n_tok-1].value.s = s;
+            toks[n_tok-1].value.s = uti_escape_str(s);
             toks[n_tok-1].line = line;
+            free(s);
             p++;
             continue;
         }
@@ -255,7 +256,7 @@ Token *lexe(char *input) {
             p++;
             int n=0;
             char *s=malloc(sizeof(char));
-            while (p < len && text[p] != '"') {
+            while (p < len && (text[p] != '"' || (text[p] == '"' && text[p - 1] == '\\'))) {
                 n++;
                 s = realloc(s, sizeof(char)*n);
                 s[n-1] = text[p];
@@ -267,8 +268,9 @@ Token *lexe(char *input) {
             n_tok++;
             toks = realloc(toks, sizeof(Token)*n_tok);
             toks[n_tok-1].type = str;
-            toks[n_tok-1].value.s = s;
+            toks[n_tok-1].value.s = uti_escape_str(s);
             toks[n_tok-1].line = line;
+            free(s);
             p++;
             continue;
         }

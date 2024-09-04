@@ -333,4 +333,3 @@ and from the automated [repository](https://github.com/elydre/sulfur_lang/releas
 ## [Built-in functions](doc/built-in/functions/intro.md)
 
 ## [Built-in variables](doc/built-in/vars/intro.md)
-

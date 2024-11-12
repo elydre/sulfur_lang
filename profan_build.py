@@ -12,8 +12,8 @@ LD      = "ld"
 
 OUTPUT  = "build/sulfur"
 
-CFLAGS  = "-ffreestanding -fno-exceptions -fno-stack-protector -m32 -I ./build/profan -D ONE_FILE=1 -D __profanOS__ -nostdinc"
-LDFLAGS = f"-nostdlib -L {profan_path}/out/zlibs -T build/profan/_link.ld -z max-page-size=0x1000 -lc -lm"
+CFLAGS  = "-ffreestanding -fno-exceptions -m32 -I ./build/profan -D ONE_FILE=1 -D __profanOS__ -nostdinc -O3 -fno-stack-protector -fno-omit-frame-pointer"
+LDFLAGS = f"-nostdlib -L {profan_path}/out/zlibs -T build/profan/_link.ld -lc -lm"
 
 OBJDIR  = "build/profan_objects"
 

@@ -168,7 +168,7 @@ int uti_is_path_relative(char *path) {
 
 char *read_file(char *path) {
     #ifdef __profanOS__
-    uint32_t file_id = fu_path_to_sid(ROOT_SID, path);
+    uint32_t file_id = fu_path_to_sid(SID_ROOT, path);
 
     if (!fu_is_file(file_id)) {
         return NULL;
@@ -206,7 +206,7 @@ char *read_file(char *path) {
 
 char *uti_read_bin_file(char *path, int *len) {
     #ifdef __profanOS__
-    uint32_t file_id = fu_path_to_sid(ROOT_SID, path);
+    uint32_t file_id = fu_path_to_sid(SID_ROOT, path);
 
     if (!fu_is_file(file_id)) {
         return NULL;
